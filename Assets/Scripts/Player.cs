@@ -12,6 +12,11 @@ public class Player : MonoBehaviour
     public float strength = 5f;
     public float tilt = 5f;
 
+    public AudioClip wingSound;
+    public AudioClip dieSound;
+    public AudioClip hitSound;
+    public AudioClip pointSound;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,20 +37,22 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // Move player up following spacebar press or left mouse click
-        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        // Move player up following spacebar press, left mouse click, or up arrow
+        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0) ||
+            Input.GetKeyDown(KeyCode.UpArrow))
         {
             direction = Vector3.up * strength;
+            AudioSource.PlayClipAtPoint(wingSound, Vector3.zero);
         }
-
-        // Move plater up following screen touch
-        if (Input.touchCount > 0)
+        // Move player up following screen touch
+        else if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             
             if (touch.phase == TouchPhase.Began) 
             {
                 direction = Vector3.up * strength;
+                AudioSource.PlayClipAtPoint(wingSound, Vector3.zero);
             }
         }
 
@@ -72,10 +79,12 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.tag == "Obstacle")
         {
+            AudioSource.PlayClipAtPoint(hitSound, Vector3.zero);
             FindObjectOfType<GameManager>().GameOver();
         } else if (other.gameObject.tag == "Scoring")
         {
             FindObjectOfType<GameManager>().IncreaseScore();
+            AudioSource.PlayClipAtPoint(pointSound, Vector3.zero);
         }
 
     }

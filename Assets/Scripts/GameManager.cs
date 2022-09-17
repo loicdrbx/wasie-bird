@@ -7,11 +7,15 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public GameObject playButton;
     public GameObject gameOver;
+    public GameObject getReady;
+    public AudioClip swooshSound;
+
     private int score;
 
     public void Awake()
     {
         Application.targetFrameRate = 60;
+        getReady.SetActive(true);
 
         Pause();
     }
@@ -21,9 +25,10 @@ public class GameManager : MonoBehaviour
         score = 0;
         scoreText.text = score.ToString();
 
-        // Hide play button and game over image
+        // Hide play button and game ready image
         playButton.SetActive(false);
         gameOver.SetActive(false);
+        getReady.SetActive(false);
 
         // Set time and enable player
         Time.timeScale = 1f;
@@ -35,6 +40,9 @@ public class GameManager : MonoBehaviour
         {
             Destroy(pipes[i].gameObject);
         }
+
+        // Swoosh sound effect
+        AudioSource.PlayClipAtPoint(swooshSound, Vector3.zero);
     }
 
     public void Pause()
