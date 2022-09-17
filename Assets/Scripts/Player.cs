@@ -8,10 +8,9 @@ public class Player : MonoBehaviour
     private int spriteIndex;
 
     private Vector3 direction;
-    private Quaternion rotation;
     public float gravity = -9.8f;
     public float strength = 5f;
-
+    public float tilt = 5f;
 
     private void Awake()
     {
@@ -26,11 +25,8 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         Vector3 position = transform.position;
-        rotation = transform.rotation;
         position.y = 0f;
-        rotation.z = 0f;
         transform.position = position;
-        transform.rotation = rotation;
         direction = Vector3.zero;
     }
 
@@ -57,17 +53,10 @@ public class Player : MonoBehaviour
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
 
-        // Tilt nose in dirction of vertical movement
-        if (direction.y > 0)
-        {
-            rotation.z = direction.y * 0.02f;
-            transform.rotation = rotation;
-        }
-        else
-        {
-            rotation.z = direction.y * 0.02f;
-            transform.rotation = rotation;
-        }
+        // Tilt in direction of vertical motion
+        Vector3 rotation = transform.eulerAngles;
+        rotation.z = direction.y * tilt;
+        transform.eulerAngles = rotation;
     }
 
     private void AnimateSprite()
