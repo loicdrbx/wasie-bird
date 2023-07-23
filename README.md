@@ -1,2 +1,4 @@
-# wasie-bird
-Arcade-style side-scroller where the player controls a wassie, attempting to fly between columns of fridges without hitting them.
+# Wassie Bird
+A Flappy Bird clone with a crypto-themed twist! Take control of a [Wassie](https://www.urbandictionary.com/define.php?term=wassie) and soar between dreaded columns of fridges.
+
+This is a arcade-style side-croller built from scratch in Unity and exported to WebGL.
