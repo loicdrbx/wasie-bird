@@ -3,6 +3,9 @@ A Flappy Bird clone with a crypto-themed twist! Take control of a [Wassie](https
 
 This is a arcade-style side-croller built from scratch in Unity and exported to WebGL.
 
+![alt text](GameScreen.png)
+
+
 ### *Play [Here](https://play.unity.com/mg/other/wassie-bird)*!
 
 
